@@ -22,7 +22,7 @@ public class Elfo : MonoBehaviour
     {
         InitMinerData();
         
-        // Hay que hacer la fsm del agente
+        // Hay que hacer la fsm del agented
         fsm = new FSM(gameObject, this);
 
         // Crear los estados en que puede estar Bob
