@@ -6,9 +6,12 @@ using DragonStates;
 public class Dragon : MonoBehaviour 
 {
     public FSM fsm;
+    public SteeringCombined steering;
+    public GameManagerScript manager;
 
     // Variables de dragon
     public int Hambre;
+    public int Cansancio;
  
 
     void InitMinerData()
@@ -24,6 +27,9 @@ public class Dragon : MonoBehaviour
         
         // Hay que hacer la fsm del agented
         fsm = new FSM(gameObject, this);
+        // Asignar el steering
+        steering = GetComponent<SteeringCombined>();
+     
 
         // Crear los estados en que puede estar Bob
         Deambular deambulando = new Deambular(this);
