@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Accion_TomarMineral : GoapAction
+public class Accion_TomarHerramienta : GoapAction
 {
-    public Accion_TomarMineral()
+    public Accion_TomarHerramienta()
     {
         // Donde vamos a poner las precondiciones y efectos de la acción
-        AddPrecondition("hayMineral", false);
+        AddPrecondition("hayHerramienta", false);
 
-        AddEffect("hayMineral", true);
+        AddEffect("hayHerramienta", true);
     }
 
     // variables de la acción
@@ -40,7 +40,7 @@ public class Accion_TomarMineral : GoapAction
         // Esto se refiere a precondiciones procedurales, es decir, que conllevan otras operaciones
 
         // Tengo que estar cerca de un "almacen" para dejar la herramienta
-        GameObject[] almacenes = GameObject.FindGameObjectsWithTag("Almacen");
+        GameObject[] almacenes = GameObject.FindGameObjectsWithTag("Tienda");
 
         GameObject almacenCercano = null;
         float distanciaMenor = 0;
@@ -82,12 +82,12 @@ public class Accion_TomarMineral : GoapAction
         if(Time.timeSinceLevelLoad > tiempoInicio + duracionAccion)
         {
             // Verificar si hay mineral en el almacen
-            if(Target.GetComponent<Inventario>().mineral >= 3) // 3 es el mineral que necesito para trabajar
+            if(Target.GetComponent<Inventario>().herramientas >= 1) // 3 es el mineral que necesito para trabajar
             {
                 // le quito al almacen
-                Target.GetComponent<Inventario>().mineral -= 3;
+                Target.GetComponent<Inventario>().herramientas -= 1;
 
-                GetComponent<Inventario>().mineral += 3;
+                GetComponent<Inventario>().herramientas += 1;
 
                 terminado = true;
 

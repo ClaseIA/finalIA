@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class GoapAction : MonoBehaviour
 {
+   
     // Una acción puede tener un costo para realizarse
     // Dependiendo del costo será la secuencia que tome el planeador
     public float cost;

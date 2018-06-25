@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Accion_TomarMineral : GoapAction
+public class Accion_IrTienda : GoapAction
 {
-    public Accion_TomarMineral()
+    public Accion_IrTienda()
     {
         // Donde vamos a poner las precondiciones y efectos de la acción
-        AddPrecondition("hayMineral", false);
+        AddPrecondition("hayHerramienta", false);
 
-        AddEffect("hayMineral", true);
+
+        AddEffect("hayHerramienta", true);
     }
 
     // variables de la acción
@@ -24,7 +25,7 @@ public class Accion_TomarMineral : GoapAction
 
     public override bool requiresInRange()
     {
-        // Si, necesita estar cerca de un almacen
+        // Si, necesita estar cerca de un almacen para depositar la herramienta
         return true;
     }
 
@@ -40,7 +41,7 @@ public class Accion_TomarMineral : GoapAction
         // Esto se refiere a precondiciones procedurales, es decir, que conllevan otras operaciones
 
         // Tengo que estar cerca de un "almacen" para dejar la herramienta
-        GameObject[] almacenes = GameObject.FindGameObjectsWithTag("Almacen");
+        GameObject[] almacenes = GameObject.FindGameObjectsWithTag("Tienda");
 
         GameObject almacenCercano = null;
         float distanciaMenor = 0;
@@ -75,33 +76,30 @@ public class Accion_TomarMineral : GoapAction
 
     public override bool Perform(GameObject gameobject)
     {
+        GameObject herramienta = GetComponent<Inventario>().herramienta;
         // El agente se tardará un poco en realizar esta acción
         if (tiempoInicio == 0)
             tiempoInicio = Time.timeSinceLevelLoad;
 
         if(Time.timeSinceLevelLoad > tiempoInicio + duracionAccion)
         {
-            // Verificar si hay herramientas en el almacen
-            if(Target.GetComponent<Inventario>().numeroHerramientas >= 1) // o para trabajar
-            {
-                // le quito al almacen
-                Target.GetComponent<Inventario>().numeroHerramientas --;
-
-                GetComponent<Inventario>().numeroHerramientas = 1;
-                GetComponent<Inventario>().herramienta.GetComponent<Herramienta>().Restaurar();
-
-                terminado = true;
-
-                return true;
-            }
-            else
-            {
-                // llego al almacen pero no hay mineral
-                return false;
-            }
+           //tomar la madera que tengo en el inventario y ponerla en el almacern
+            Target.GetComponent<Inventario>().madera += GetComponent<Inventario>().madera;
+            //como ya deje la madera, el agente se queda sin madera
+            GetComponent<Inventario>().madera = 0;
+            herramienta.GetComponent<Herramienta>().Restaurar();
+            terminado = true;
         }
         return true;
     }
 
-   
+    // Use this for initialization
+    void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
 }

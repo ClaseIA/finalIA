@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GoapAgent : MonoBehaviour
 {
+    public SteeringCombined steering;
     private List<GoapAction> AccionesDisponibles;
     private Queue<GoapAction> AccionesActuales;
 
@@ -22,6 +23,7 @@ public class GoapAgent : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        steering = GetComponent<SteeringCombined>();
         Planeador = new GoapPlanner();
 
         maquinaDeEstados = new FSMGOAP();
@@ -166,11 +168,15 @@ public class GoapAgent : MonoBehaviour
                 fsm.popState();
             }
 
-            // código de movimiento
-            gameObj.transform.position = Vector3.MoveTowards(
-                gameObj.transform.position,
-                accion.Target.transform.position,
-                Time.deltaTime * 5f);
+            /*  // código de movimiento
+              gameObj.transform.position = Vector3.MoveTowards(
+                  gameObj.transform.position,
+                  accion.Target.transform.position,
+                  Time.deltaTime * 5f);*/
+            steering.Target = accion.Target.transform;
+
+
+
 
             if (Vector3.Distance(
                 gameObj.transform.position, accion.Target.transform.position) < 1f)

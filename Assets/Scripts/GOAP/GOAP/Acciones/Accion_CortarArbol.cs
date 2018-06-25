@@ -8,9 +8,10 @@ public class Accion_CortarArbol : GoapAction
     {
         // Donde vamos a poner las precondiciones y efectos de la acción
         AddPrecondition("hayMadera", false);
-
         AddPrecondition("hayHerramienta", true);
+
         AddEffect("hayMadera",true);
+       
     }
 
     // variables de la acción
@@ -76,27 +77,41 @@ public class Accion_CortarArbol : GoapAction
 
     public override bool Perform(GameObject gameobject)
     {
+        GameObject herramienta = GetComponent<Inventario>().herramienta;
+
+     
+
         // El agente se tardará un poco en realizar esta acción
         if (tiempoInicio == 0)
             tiempoInicio = Time.timeSinceLevelLoad;
 
         if(Time.timeSinceLevelLoad > tiempoInicio + duracionAccion)
         {
-            //necesito acceder a la herramienta para cortar el arbol
-            GameObject herramienta = GetComponent<Inventario>().herramienta;
-            // TODO: herramietna sufra desgaste
 
-            herramienta.GetComponent<Herramienta>().Usar();
-
-            //tomar madera del arbol
-
-            if (Target.GetComponent<Inventario>().madera >= 5)
+            if (!herramienta.GetComponent<Herramienta>().EstaRota())
             {
-                //le queda madera al arbol
-                GetComponent<Inventario>().madera += 5; //tomo madera
-                Target.GetComponent<Inventario>().madera -= 5; //le quito madera
+                //necesito acceder a la herramienta para cortar el arbol
 
+                // TODO: herramietna sufra desgaste
+
+                herramienta.GetComponent<Herramienta>().Usar();
+
+                //tomar madera del arbol
+
+                if (Target.GetComponent<Inventario>().madera >= 5)
+                {
+                    //le queda madera al arbol
+                    GetComponent<Inventario>().madera += 5; //tomo madera
+                    Target.GetComponent<Inventario>().madera -= 5; //le quito madera
+
+                    terminado = true;
+                }
+            }
+
+            else {
+                Debug.Log("sin herramienta");
                 terminado = true;
+
             }
         }
         return true;
