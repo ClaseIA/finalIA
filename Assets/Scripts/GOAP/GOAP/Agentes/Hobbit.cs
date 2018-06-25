@@ -11,11 +11,19 @@ public class Hobbit : Trabajador
         Dictionary<string, object> meta = new Dictionary<string, object>();
 
         // puede tener varias metas
+
+        if(inventario.miCasa.GetComponent<casitaScript>().destruida&& almacen.GetComponent<Inventario>().casita > 0)
+        meta.Add("tenerCasa", true);
+
+        else
         meta.Add("almacenarMadera", true);
+       
 
         Debug.Log("Se propuso una meta en la vida");
 
         return meta;
     }
 
-}
+  
+
+    }

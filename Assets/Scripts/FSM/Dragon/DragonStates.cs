@@ -243,9 +243,11 @@ namespace DragonStates
                 arrive = false;
                 int casa =  Random.Range(0, dragon.manager.CasasComarca.Length);
 
-                if (dragon.manager.CasasComarca[casa].activeSelf == true)
+                if (dragon.manager.CasasComarca[casa].GetComponent<casitaScript>().destruida == false)
                 {
-                    dragon.manager.CasasComarca[casa].SetActive(false);
+                    GameObject almacen = GameObject.FindWithTag("Almacen");
+                    almacen.GetComponent<almacenScript>().casitasmuertas += 1;
+                    dragon.manager.CasasComarca[casa].GetComponent<casitaScript>().destruida=true;
                     ChangeState(StateID.Comer);
                 }
             }

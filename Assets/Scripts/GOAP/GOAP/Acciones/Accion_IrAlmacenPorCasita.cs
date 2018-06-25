@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Accion_AlmacenarMadera : GoapAction
+public class Accion_IrAlmacenPorCasita : GoapAction
 {
-    public Accion_AlmacenarMadera()
+    public Accion_IrAlmacenPorCasita()
     {
         // Donde vamos a poner las precondiciones y efectos de la acción
-        AddPrecondition("hayMadera", true);
+        AddPrecondition("hayCasitaInventario", true);
+        AddPrecondition("tengoCasa", false);
+        
 
-        AddEffect("almacenarMadera", true);
-        //AddEffect("tenerCasa", true);
-        AddEffect("hayMadera", false);
+        AddPrecondition("tengoMaterialCasita", false);
+       // AddEffect("tenerCasa", true);
+        AddEffect("tengoMaterialCasita", true);
     }
 
     // variables de la acción
@@ -77,6 +79,7 @@ public class Accion_AlmacenarMadera : GoapAction
 
     public override bool Perform(GameObject gameobject)
     {
+        GameObject herramienta = GetComponent<Inventario>().herramienta;
         // El agente se tardará un poco en realizar esta acción
         if (tiempoInicio == 0)
             tiempoInicio = Time.timeSinceLevelLoad;
@@ -84,9 +87,10 @@ public class Accion_AlmacenarMadera : GoapAction
         if(Time.timeSinceLevelLoad > tiempoInicio + duracionAccion)
         {
            //tomar la madera que tengo en el inventario y ponerla en el almacern
-            Target.GetComponent<Inventario>().madera += GetComponent<Inventario>().madera;
+            Target.GetComponent<Inventario>().casita -= 1;
             //como ya deje la madera, el agente se queda sin madera
-            GetComponent<Inventario>().madera = 0;
+            GetComponent<Inventario>().casita = 1;
+           
             terminado = true;
         }
         return true;

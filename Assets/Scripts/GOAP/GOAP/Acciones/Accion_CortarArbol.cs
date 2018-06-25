@@ -9,6 +9,8 @@ public class Accion_CortarArbol : GoapAction
         // Donde vamos a poner las precondiciones y efectos de la acción
         AddPrecondition("hayMadera", false);
         AddPrecondition("hayHerramienta", true);
+        
+        // AddPrecondition("tenerCasa", true);
 
         AddEffect("hayMadera",true);
        
