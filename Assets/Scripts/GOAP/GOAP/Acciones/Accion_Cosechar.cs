@@ -90,7 +90,7 @@ public class Accion_Cosechar : GoapAction
             {
                 //le queda madera al arbol
                 GetComponent<Inventario>().comida += 4; //tomo madera
-                Target.GetComponent<CampoScript>().listoCosechar = false; //le quito madera
+                Target.GetComponent<Inventario>().comida=0; //le quito madera
 
                 terminado = true;
             }

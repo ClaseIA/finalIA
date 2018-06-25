@@ -32,9 +32,9 @@ public class almacenScript : MonoBehaviour {
 
         if (!canasta.activeSelf)
         {
-            if (GetComponent<Inventario>().madera >= 5)
+            if (GetComponent<Inventario>().madera >=20)
             {
-                GetComponent<Inventario>().madera -= 5;
+                GetComponent<Inventario>().madera -= 20;
                 canasta.SetActive(true);
             }
 
