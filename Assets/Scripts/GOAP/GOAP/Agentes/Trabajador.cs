@@ -10,6 +10,9 @@ public abstract class Trabajador : MonoBehaviour, IGOAP
 
     public GameObject herramienta;
     public GameObject almacen;
+    public GameObject campo;
+    public GameObject canasta;
+
 
     public abstract Dictionary<string, object> CreateGoalState();
 
@@ -35,10 +38,12 @@ public abstract class Trabajador : MonoBehaviour, IGOAP
         Dictionary<string, object> datos = new Dictionary<string, object>();
 
         datos.Add("hayMineral", inventario.mineral > 0);
+        datos.Add("hayComida", inventario.comida > 0);
         datos.Add("hayMadera", inventario.madera > 0);
         datos.Add("hayHerramienta", inventario.herramienta.activeInHierarchy);
         datos.Add("tengoCasa",inventario.miCasa.GetComponent<casitaScript>().destruida==false);
         datos.Add("hayCasitaInventario", almacen.GetComponent<Inventario>().casita > 0);
+        datos.Add("listoCosechar", campo.GetComponent<CampoScript>().listoCosechar);
         datos.Add("tengoMaterialCasita", inventario.casita>0);
        
         return datos;
@@ -49,7 +54,9 @@ public abstract class Trabajador : MonoBehaviour, IGOAP
     {
 
         almacen = GameObject.FindWithTag("Almacen");
-		if(inventario == null)
+        campo = GameObject.FindWithTag("Campo");
+        //canasta = GameObject.FindWithTag("Canasta");
+        if (inventario == null)
         {
             inventario = GetComponent<Inventario>();
             inventario.numeroHerramientas++;

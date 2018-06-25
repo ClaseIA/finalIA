@@ -8,6 +8,7 @@ public class Inventario : MonoBehaviour
     public int madera;
     public int herramientas;
     public int casita;
+    public int comida;
     public GameObject miCasa;
 
     public GameObject herramienta;

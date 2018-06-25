@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hobbit : Trabajador
 {
+   
     // Su objetivo es crear herramientas y ponerlas en un almacen
 
     public override Dictionary<string, object> CreateGoalState()
@@ -12,11 +13,21 @@ public class Hobbit : Trabajador
 
         // puede tener varias metas
 
-        if(inventario.miCasa.GetComponent<casitaScript>().destruida&& almacen.GetComponent<Inventario>().casita > 0)
-        meta.Add("tenerCasa", true);
+        if (inventario.miCasa.GetComponent<casitaScript>().destruida && almacen.GetComponent<Inventario>().casita > 0)
+            meta.Add("tenerCasa", true);
 
         else
-        meta.Add("almacenarMadera", true);
+        {
+            if (campo.GetComponent<CampoScript>().listoCosechar && canasta.activeSelf&& canasta.GetComponent<Inventario>().comida<8)
+            {
+               // Debug.Log("holaaaaaaaaaaaaaaaaaa");
+                meta.Add("cosechar", true);
+            }
+            else
+                meta.Add("almacenarMadera", true);
+        }
+
+        
        
 
         Debug.Log("Se propuso una meta en la vida");

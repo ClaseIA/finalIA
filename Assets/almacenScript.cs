@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class almacenScript : MonoBehaviour {
     public GameObject manager;
+    public GameObject canasta;
     int casitas;
    public int casitasmuertas;
 
@@ -28,6 +29,16 @@ public class almacenScript : MonoBehaviour {
             }
 
         }
+
+        if (!canasta.activeSelf)
+        {
+            if (GetComponent<Inventario>().madera >= 5)
+            {
+                GetComponent<Inventario>().madera -= 5;
+                canasta.SetActive(true);
+            }
+
+         }
 
       
 

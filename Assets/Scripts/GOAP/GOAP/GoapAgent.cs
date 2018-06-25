@@ -66,6 +66,7 @@ public class GoapAgent : MonoBehaviour
             if (plan != null)
             {
                 Debug.Log("Tengo un plan!");
+                steering.arrive = true;
                 AccionesActuales = plan;
                 goapData.PlanFound(goal, plan);
 
@@ -75,6 +76,7 @@ public class GoapAgent : MonoBehaviour
             else
             {
                 Debug.Log("No tengo plan :(");
+                steering.arrive = false;
                 goapData.PlanFailed(goal);
 
                 maquinaDeEstados.popState();
