@@ -20,9 +20,9 @@ public class almacenScript : MonoBehaviour {
 
         if (casitasmuertas>=1)
         {
-            if (GetComponent<Inventario>().madera >= 25)
+            if (GetComponent<Inventario>().madera >= 30)
             {
-                GetComponent<Inventario>().madera -= 25;
+                GetComponent<Inventario>().madera -= 30;
                 GetComponent<Inventario>().casita = 1;
                 casitasmuertas -= 1;
 
@@ -30,11 +30,11 @@ public class almacenScript : MonoBehaviour {
 
         }
 
-        if (!canasta.activeSelf)
+       else if (!canasta.activeSelf)
         {
-            if (GetComponent<Inventario>().madera >=20)
+            if (GetComponent<Inventario>().madera >=15)
             {
-                GetComponent<Inventario>().madera -= 20;
+                GetComponent<Inventario>().madera -= 15;
                 canasta.SetActive(true);
             }
 

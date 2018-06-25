@@ -2,28 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class casitaScript : MonoBehaviour {
-    public bool destruida;
-    public Sprite[] casitas;
+public class canastaSprite : MonoBehaviour {
+    public Sprite[] canastas;
     private SpriteRenderer spriteRenderer;
-
     // Use this for initialization
     void Start () {
-        // destruida = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-
     }
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (destruida)
+        if (GetComponent<Inventario>().comida >= 8)
         {
-             spriteRenderer.sprite= casitas[1];
+            spriteRenderer.sprite = canastas[1];
         }
         else
-            spriteRenderer.sprite = casitas[0];
+            spriteRenderer.sprite = canastas[0];
 
     }
 }

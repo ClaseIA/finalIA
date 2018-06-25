@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class CampoScript : MonoBehaviour {
     public bool listoCosechar;
-   
-	// Use this for initialization
-	void Start () {
+    public Sprite[] campito;
+    private SpriteRenderer spriteRenderer;
+
+    // Use this for initialization
+    void Start () {
         listoCosechar = false;
-        
-	}
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -21,7 +24,9 @@ public class CampoScript : MonoBehaviour {
 
         if (!listoCosechar)
         {
+            spriteRenderer.sprite = campito[0];
             StartCoroutine(cosechatiempo());
+          
         }
 
         else
@@ -38,5 +43,6 @@ public class CampoScript : MonoBehaviour {
      
         GetComponent<Inventario>().comida += 4;
         listoCosechar =true;
+        spriteRenderer.sprite = campito[1];
     }
 }

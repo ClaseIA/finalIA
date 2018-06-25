@@ -23,6 +23,7 @@ public class playerScript : MonoBehaviour {
             if (other.GetComponent<Inventario>().comida >=8)
             {
                 Debug.Log("llevando canasta");
+                other.GetComponent<Inventario>().comida = 0;
                 canasta.SetActive(true);
                 other.gameObject.SetActive(false);
             }
