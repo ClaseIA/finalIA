@@ -198,6 +198,7 @@ namespace DragonStates
         public override void OnExit(GameObject objeto)
         {
 
+
         }
 
     }
